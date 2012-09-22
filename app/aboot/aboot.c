@@ -66,7 +66,7 @@
 
 #define EXPAND(NAME) #NAME
 #define TARGET(NAME) EXPAND(NAME)
-#define DEFAULT_CMDLINE "mem=100M console=null";
+#define DEFAULT_CMDLINE "mem=215M console=null";
 
 #ifdef MEMBASE
 #define EMMC_BOOT_IMG_HEADER_ADDR (0xFF000+(MEMBASE))

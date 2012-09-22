@@ -165,7 +165,7 @@ void uart_init(void)
 
 	uwr(0, UART_RFWR);
 
-	uwr(UART_CSR_115200, UART_CSR);
+	uwr(UART_CSR_38400, UART_CSR);
 	uwr(0, UART_IRDA);
 	uwr(0x1E, UART_HCR);
 //      uwr(0x7F4, UART_MR1); /* RFS/ CTS/ 500chr RFR */
