@@ -3,7 +3,7 @@
 #include <debug.h>
 #include <dev/gpio.h>
 #include <kernel/thread.h>
-#include <platform/mddi.h>
+#include <mddi.h>
 
 #define MDDI_CLIENT_CORE_BASE  0x108000
 #define LCD_CONTROL_BLOCK_BASE 0x110000
@@ -359,7 +359,7 @@ static struct init_table toshiba_480x640_init_table[] = {
 	{ ASY_CMDSET,           0x00000005 },  //   # LCD.ASY_CMDSET  # Direct command transfer enable
 	{ ASY_CMDSET,           0x00000004 },  //   # LCD.ASY_CMDSET  # Direct command transfer disable
 	{ 0,                    10         },  //  wait_ms(10);
-	{ ASY_DATA,             0x80000000 },  //   # LCD.ASY_DATx  # DUMMY write_client_reg(Å@*NOTE2
+	{ ASY_DATA,             0x80000000 },  //   # LCD.ASY_DATx  # DUMMY write_client_reg(\81@*NOTE2
 	{ ASY_DATB,             0x80000000 },  //     
 	{ ASY_DATC,             0x80000000 },  //     
 	{ ASY_DATD,             0x80000000 },  //     
@@ -435,7 +435,7 @@ static void _panel_init(struct init_table *init_table)
 		if (init_table[n].reg != 0)
 			mddi_remote_write(init_table[n].val, init_table[n].reg);
 		else
-			thread_sleep(init_table[n].val);//mdelay(init_table[n].val);
+			mdelay(init_table[n].val);
 		n++;
 	}
 
@@ -460,9 +460,9 @@ void panel_poweron(void)
 {
 	gpio_set(88, 0);
 	gpio_config(88, GPIO_OUTPUT);
-	thread_sleep(1); //udelay(10);
+	udelay(10);
 	gpio_set(88, 1);
-	thread_sleep(10); //mdelay(10);
+	mdelay(10);
 
 	//mdelay(1000); // uncomment for second stage boot
 }
